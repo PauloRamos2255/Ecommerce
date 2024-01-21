@@ -1,0 +1,111 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Recuperacion de Cuenta</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/recuperar.css">
+    <link rel="shortcut icon" href="/imagenes/logo.jpg" type="image/x-">
+</head>
+
+<body>
+    <div class="login">
+        <section class="vh-100">
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-9 col-lg-6 col-xl-5">
+                        <img src="/imagenes/logo.jpg"
+                             class="img-fluid" alt="Sample image">
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <form action="@Url.Action("OtraForma","Acceso")" method="post">
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <h1>Te enviaremos un SMS</h1>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" name="numero" class="form-control form-control-lg"
+                                       placeholder="Ingrese su Nuemro Telefonico" />
+                            </div>
+                            @{
+                                if (ViewBag.Error != null)
+                                {
+                                    <div class="form-floating mb-3">
+                                        <div class="alert alert-danger" role="alert">
+                                            @ViewBag.Error
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <a href="Menu.html">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        Enviar
+                                    </button>
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Right -->
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <!-- Asegúrate de incluir jQuery y jQuery Validate antes de este código -->
+    <script src="ruta/jquery.min.js"></script>
+    <script src="ruta/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Selector para el campo de texto
+            var numeroInput = $('input[name="numero"]');
+
+            // Función que se ejecutará en el evento keyup
+            numeroInput.on('input', function () {
+                // Obtener el valor ingresado en el campo de texto
+                var numero = $(this).val();
+
+                // Eliminar cualquier caracter que no sea un número usando una expresión regular
+                numero = numero.replace(/\D/g, '');
+
+                // Limitar el número a 9 dígitos
+                if (numero.length > 9) {
+                    numero = numero.substr(0, 9);
+                }
+
+                // Establecer el valor modificado en el campo de texto
+                $(this).val(numero);
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
+

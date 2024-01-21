@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@600&display=swap');
+
+body{
+    background-color: lemonchiffon;     
+}
+
+header nav ul li a {
+    color: white !important;
+    font-family: 'Belanosima';
+}
+h4{
+    font-family: 'Belanosima', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.row{
+    margin-top: 15px;
+}
+
+.pagination{
+    margin-top: 20px;
+}
+
+#contactanos{
+    padding-top: 10px;
+    font-family: tahoma;
+    font-weight: bold;
+}
+.cart button{
+    border-radius: 7px;
+    border: 1px white solid;
+    margin-right: 20px;
+    background-color: rgb(196, 13, 13);
+    color:white;
+    height: 40px;
+}
+
+.cart button:hover{
+    background-color: lemonchiffon;
+    color:black;
+}
+
+.user button{
+    border-radius: 7px;
+    margin-right: 10px;
+    border: 1px white solid;
+    background-color: rgb(196, 13, 13);
+    color:white;
+    height: 40px;
+}
+
+.user button:hover{
+    background-color: lemonchiffon;
+    color: black;
+}

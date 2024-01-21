@@ -1,0 +1,967 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TADIAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carrito">
+          <Key>
+            <PropertyRef Name="id_Carrito" />
+          </Key>
+          <Property Name="id_Carrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Cliente" Type="int" />
+          <Property Name="id_Producto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo" Type="int" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="255" />
+          <Property Name="Restablecer" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Detalle_Venta">
+          <Key>
+            <PropertyRef Name="id_DVenta" />
+          </Key>
+          <Property Name="id_DVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Venta" Type="int" />
+          <Property Name="id_Producto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="id_Mar" Type="int" />
+          <Property Name="id_Categoria" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Stock" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="NombreImagen" Type="varchar" MaxLength="100" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="date" />
+          <Property Name="RutaImagen" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TADIAdmin.dbo.Tb_Ubigeo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Tb_Ubigeo">
+          <Key>
+            <PropertyRef Name="Id_Ubigeo" />
+          </Key>
+          <Property Name="Id_Ubigeo" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="IdDepa" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdProv" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdDist" Type="nvarchar" MaxLength="255" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="255" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="255" />
+          <Property Name="Distrito" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cod_Ven" Type="nchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+          <Property Name="Id_Rol" Type="int" />
+          <Property Name="Correo" Type="varchar" MaxLength="200" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+          <Property Name="Reestablecer" Type="bit" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="Numero" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="id_Venta" />
+          </Key>
+          <Property Name="id_Venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Cliente" Type="int" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Precio_Venta" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Descuento" Type="decimal" Precision="2" Scale="2" />
+          <Property Name="idTransaccion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Carrito__id_Clie__534D60F1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carrito__id_Prod__5441852A">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_V__id_Pr__5070F446">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_V__id_Ve__4F7CD00D">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="id_Venta" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="id_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__id_Ca__45F365D3">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__id_Ma__44FF419A">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Mar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__Id_Rol__398D8EEE">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Venta__id_Client__4CA06362">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_EditarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCategoria" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_EditarMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMarca" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_EditarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Rol" Type="int" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Numero" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_EliminarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCategoria" Type="int" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_EliminarMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMarca" Type="int" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_EliminarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="sp_RegistarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Coreo" Type="varchar" Mode="In" />
+          <Parameter Name="Clave" Type="varchar" Mode="In" />
+          <Parameter Name="Sexo" Type="int" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_RegistrarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_RegistrarMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_RegistrarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripciopn" Type="varchar" Mode="In" />
+          <Parameter Name="IdMarca" Type="int" Mode="In" />
+          <Parameter Name="IdCategoria" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Stock" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_Registrarusuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="rol" Type="int" Mode="In" />
+          <Parameter Name="Clave" Type="varchar" Mode="In" />
+          <Parameter Name="Numero" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_ReporteDashboard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_ReporteVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fechainicio" Type="varchar" Mode="In" />
+          <Parameter Name="fechafin" Type="varchar" Mode="In" />
+          <Parameter Name="idTransaccion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_EditarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="IdMarca" Type="int" Mode="In" />
+          <Parameter Name="IdCategoria" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Stock" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+          <Parameter Name="Resultado" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="TADIAdminModelStoreContainer">
+          <EntitySet Name="Carrito" EntityType="Self.Carrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Ubigeo" EntityType="Self.Tb_Ubigeo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tb_Ubigeo].[Id_Ubigeo] AS [Id_Ubigeo], 
+    [Tb_Ubigeo].[IdDepa] AS [IdDepa], 
+    [Tb_Ubigeo].[IdProv] AS [IdProv], 
+    [Tb_Ubigeo].[IdDist] AS [IdDist], 
+    [Tb_Ubigeo].[Departamento] AS [Departamento], 
+    [Tb_Ubigeo].[Provincia] AS [Provincia], 
+    [Tb_Ubigeo].[Distrito] AS [Distrito], 
+    [Tb_Ubigeo].[Cod_Ven] AS [Cod_Ven]
+    FROM [dbo].[Tb_Ubigeo] AS [Tb_Ubigeo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Carrito__id_Clie__534D60F1" Association="Self.FK__Carrito__id_Clie__534D60F1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carrito__id_Prod__5441852A" Association="Self.FK__Carrito__id_Prod__5441852A">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_V__id_Pr__5070F446" Association="Self.FK__Detalle_V__id_Pr__5070F446">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_V__id_Ve__4F7CD00D" Association="Self.FK__Detalle_V__id_Ve__4F7CD00D">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__id_Ca__45F365D3" Association="Self.FK__Productos__id_Ca__45F365D3">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__id_Ma__44FF419A" Association="Self.FK__Productos__id_Ma__44FF419A">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__Id_Rol__398D8EEE" Association="Self.FK__Usuarios__Id_Rol__398D8EEE">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Venta__id_Client__4CA06362" Association="Self.FK__Venta__id_Client__4CA06362">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TADIAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carrito">
+          <Key>
+            <PropertyRef Name="id_Carrito" />
+          </Key>
+          <Property Name="id_Carrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Cliente" Type="Int32" />
+          <Property Name="id_Producto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Carrito__id_Clie__534D60F1" FromRole="Carrito" ToRole="Cliente" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Carrito__id_Prod__5441852A" FromRole="Carrito" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__id_Ca__45F365D3" FromRole="Categoria" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="Int32" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Restablecer" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Carrito" Relationship="Self.FK__Carrito__id_Clie__534D60F1" FromRole="Cliente" ToRole="Carrito" />
+          <NavigationProperty Name="Venta" Relationship="Self.FK__Venta__id_Client__4CA06362" FromRole="Cliente" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Detalle_Venta">
+          <Key>
+            <PropertyRef Name="id_DVenta" />
+          </Key>
+          <Property Name="id_DVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Venta" Type="Int32" />
+          <Property Name="id_Producto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Detalle_V__id_Pr__5070F446" FromRole="Detalle_Venta" ToRole="Productos" />
+          <NavigationProperty Name="Venta" Relationship="Self.FK__Detalle_V__id_Ve__4F7CD00D" FromRole="Detalle_Venta" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__id_Ma__44FF419A" FromRole="Marca" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_Mar" Type="Int32" />
+          <Property Name="id_Categoria" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreImagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+          <Property Name="RutaImagen" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Carrito" Relationship="Self.FK__Carrito__id_Prod__5441852A" FromRole="Productos" ToRole="Carrito" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK__Productos__id_Ca__45F365D3" FromRole="Productos" ToRole="Categoria" />
+          <NavigationProperty Name="Detalle_Venta" Relationship="Self.FK__Detalle_V__id_Pr__5070F446" FromRole="Productos" ToRole="Detalle_Venta" />
+          <NavigationProperty Name="Marca" Relationship="Self.FK__Productos__id_Ma__44FF419A" FromRole="Productos" ToRole="Marca" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__Id_Rol__398D8EEE" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Rol" Type="Int32" />
+          <Property Name="Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Reestablecer" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="Numero" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__Id_Rol__398D8EEE" FromRole="Usuarios" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="id_Venta" />
+          </Key>
+          <Property Name="id_Venta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Cliente" Type="Int32" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Precio_Venta" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Descuento" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="idTransaccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Venta__id_Client__4CA06362" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="Detalle_Venta" Relationship="Self.FK__Detalle_V__id_Ve__4F7CD00D" FromRole="Venta" ToRole="Detalle_Venta" />
+        </EntityType>
+        <EntityType Name="Tb_Ubigeo">
+          <Key>
+            <PropertyRef Name="Id_Ubigeo" />
+          </Key>
+          <Property Name="Id_Ubigeo" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IdDepa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdProv" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdDist" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Departamento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Provincia" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Distrito" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cod_Ven" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Carrito__id_Clie__534D60F1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carrito__id_Prod__5441852A">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__id_Ca__45F365D3">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Venta__id_Client__4CA06362">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_V__id_Pr__5070F446">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle_V__id_Ve__4F7CD00D">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="id_Venta" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="id_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__id_Ma__44FF419A">
+          <End Role="Marca" Type="Self.Marca" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="id_Mar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__Id_Rol__398D8EEE">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TADIAdminEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carrito" EntityType="Self.Carrito" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" />
+          <EntitySet Name="Tb_Ubigeo" EntityType="Self.Tb_Ubigeo" />
+          <AssociationSet Name="FK__Carrito__id_Clie__534D60F1" Association="Self.FK__Carrito__id_Clie__534D60F1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carrito__id_Prod__5441852A" Association="Self.FK__Carrito__id_Prod__5441852A">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__id_Ca__45F365D3" Association="Self.FK__Productos__id_Ca__45F365D3">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Venta__id_Client__4CA06362" Association="Self.FK__Venta__id_Client__4CA06362">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_V__id_Pr__5070F446" Association="Self.FK__Detalle_V__id_Pr__5070F446">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle_V__id_Ve__4F7CD00D" Association="Self.FK__Detalle_V__id_Ve__4F7CD00D">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__id_Ma__44FF419A" Association="Self.FK__Productos__id_Ma__44FF419A">
+            <End Role="Marca" EntitySet="Marca" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__Id_Rol__398D8EEE" Association="Self.FK__Usuarios__Id_Rol__398D8EEE">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="sp_EditarCategoria">
+            <Parameter Name="IdCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_EditarMarca">
+            <Parameter Name="IdMarca" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_EditarUsuario">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Rol" Mode="In" Type="Int32" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Numero" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_EliminarCategoria">
+            <Parameter Name="IdCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_EliminarMarca">
+            <Parameter Name="IdMarca" Mode="In" Type="Int32" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_EliminarProducto">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistarCliente">
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Coreo" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="Int32" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistrarCategoria">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistrarMarca">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RegistrarProducto">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripciopn" Mode="In" Type="String" />
+            <Parameter Name="IdMarca" Mode="In" Type="Int32" />
+            <Parameter Name="IdCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Registrarusuario">
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="rol" Mode="In" Type="Int32" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+            <Parameter Name="Numero" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ReporteDashboard" ReturnType="Collection(TADIAdminModel.sp_ReporteDashboard_Result)" />
+          <FunctionImport Name="sp_ReporteVentas" ReturnType="Collection(TADIAdminModel.sp_ReporteVentas_Result)">
+            <Parameter Name="fechainicio" Mode="In" Type="String" />
+            <Parameter Name="fechafin" Mode="In" Type="String" />
+            <Parameter Name="idTransaccion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_EditarProducto">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="IdMarca" Mode="In" Type="Int32" />
+            <Parameter Name="IdCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+            <Parameter Name="Resultado" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_ReporteDashboard_Result">
+          <Property Type="Int32" Name="TotalCliente" Nullable="true" />
+          <Property Type="Int32" Name="TotalVenta" Nullable="true" />
+          <Property Type="Int32" Name="TotalProducto" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_ReporteVentas_Result">
+          <Property Type="String" Name="FechaVenta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Cliente" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="Producto" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="IdTransaccion" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TADIAdminModelStoreContainer" CdmEntityContainer="TADIAdminEntities">
+          <EntitySetMapping Name="Carrito">
+            <EntityTypeMapping TypeName="TADIAdminModel.Carrito">
+              <MappingFragment StoreEntitySet="Carrito">
+                <ScalarProperty Name="id_Carrito" ColumnName="id_Carrito" />
+                <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+                <ScalarProperty Name="id_Producto" ColumnName="id_Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="TADIAdminModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="TADIAdminModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Restablecer" ColumnName="Restablecer" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Venta">
+            <EntityTypeMapping TypeName="TADIAdminModel.Detalle_Venta">
+              <MappingFragment StoreEntitySet="Detalle_Venta">
+                <ScalarProperty Name="id_DVenta" ColumnName="id_DVenta" />
+                <ScalarProperty Name="id_Venta" ColumnName="id_Venta" />
+                <ScalarProperty Name="id_Producto" ColumnName="id_Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="TADIAdminModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="TADIAdminModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="id_Mar" ColumnName="id_Mar" />
+                <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NombreImagen" ColumnName="NombreImagen" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="RutaImagen" ColumnName="RutaImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TADIAdminModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="TADIAdminModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Reestablecer" ColumnName="Reestablecer" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="TADIAdminModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="id_Venta" ColumnName="id_Venta" />
+                <ScalarProperty Name="id_Cliente" ColumnName="id_Cliente" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="idTransaccion" ColumnName="idTransaccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Ubigeo">
+            <EntityTypeMapping TypeName="TADIAdminModel.Tb_Ubigeo">
+              <MappingFragment StoreEntitySet="Tb_Ubigeo">
+                <ScalarProperty Name="Id_Ubigeo" ColumnName="Id_Ubigeo" />
+                <ScalarProperty Name="IdDepa" ColumnName="IdDepa" />
+                <ScalarProperty Name="IdProv" ColumnName="IdProv" />
+                <ScalarProperty Name="IdDist" ColumnName="IdDist" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+                <ScalarProperty Name="Cod_Ven" ColumnName="Cod_Ven" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_EditarCategoria" FunctionName="TADIAdminModel.Store.sp_EditarCategoria" />
+          <FunctionImportMapping FunctionImportName="sp_EditarMarca" FunctionName="TADIAdminModel.Store.sp_EditarMarca" />
+          <FunctionImportMapping FunctionImportName="sp_EditarUsuario" FunctionName="TADIAdminModel.Store.sp_EditarUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_EliminarCategoria" FunctionName="TADIAdminModel.Store.sp_EliminarCategoria" />
+          <FunctionImportMapping FunctionImportName="sp_EliminarMarca" FunctionName="TADIAdminModel.Store.sp_EliminarMarca" />
+          <FunctionImportMapping FunctionImportName="sp_EliminarProducto" FunctionName="TADIAdminModel.Store.sp_EliminarProducto" />
+          <FunctionImportMapping FunctionImportName="sp_RegistarCliente" FunctionName="TADIAdminModel.Store.sp_RegistarCliente" />
+          <FunctionImportMapping FunctionImportName="sp_RegistrarCategoria" FunctionName="TADIAdminModel.Store.sp_RegistrarCategoria" />
+          <FunctionImportMapping FunctionImportName="sp_RegistrarMarca" FunctionName="TADIAdminModel.Store.sp_RegistrarMarca" />
+          <FunctionImportMapping FunctionImportName="sp_RegistrarProducto" FunctionName="TADIAdminModel.Store.sp_RegistrarProducto" />
+          <FunctionImportMapping FunctionImportName="sp_Registrarusuario" FunctionName="TADIAdminModel.Store.sp_Registrarusuario" />
+          <FunctionImportMapping FunctionImportName="sp_ReporteDashboard" FunctionName="TADIAdminModel.Store.sp_ReporteDashboard">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TADIAdminModel.sp_ReporteDashboard_Result">
+                <ScalarProperty Name="TotalCliente" ColumnName="TotalCliente" />
+                <ScalarProperty Name="TotalVenta" ColumnName="TotalVenta" />
+                <ScalarProperty Name="TotalProducto" ColumnName="TotalProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ReporteVentas" FunctionName="TADIAdminModel.Store.sp_ReporteVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TADIAdminModel.sp_ReporteVentas_Result">
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_EditarProducto" FunctionName="TADIAdminModel.Store.usp_EditarProducto" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="e70b72d75e58463a8c6fe702948e5b48" Name="Diagram1">
+        <EntityTypeShape EntityType="TADIAdminModel.Carrito" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Categoria" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Cliente" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Detalle_Venta" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Marca" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Productos" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Roles" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Usuarios" Width="1.5" PointX="8" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Venta" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TADIAdminModel.Tb_Ubigeo" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="TADIAdminModel.FK__Carrito__id_Clie__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Carrito__id_Prod__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Productos__id_Ca__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Venta__id_Client__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Detalle_V__id_Pr__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Detalle_V__id_Ve__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Productos__id_Ma__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="TADIAdminModel.FK__Usuarios__Id_Rol__398D8EEE" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

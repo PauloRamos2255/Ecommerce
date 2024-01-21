@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D667557-0FCD-442C-9BC5-66ABD7506B7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Datos</RootNamespace>
+    <AssemblyName>Datos</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Carrito.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categoria.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CD_Categoria.cs" />
+    <Compile Include="CD_Cliente.cs" />
+    <Compile Include="CD_Dashboard.cs" />
+    <Compile Include="CD_Marca.cs" />
+    <Compile Include="CD_Producto.cs" />
+    <Compile Include="CD_Roles.cs" />
+    <Compile Include="CD_Usuarios.cs" />
+    <Compile Include="Cliente.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Detalle_Venta.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Marca.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_ReporteDashboard_Result.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_ReporteVentas_Result.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TADI.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TADI.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TADI.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TADI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TADI.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Tb_Ubigeo.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Venta.cs">
+      <DependentUpon>TADI.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="TADI.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TADI.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TADI.edmx.diagram">
+      <DependentUpon>TADI.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidad+\Entidad.csproj">
+      <Project>{51c50693-f9a4-42d6-8efe-5417a641afad}</Project>
+      <Name>Entidad</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TADI.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TADI.edmx</DependentUpon>
+      <LastGenOutput>TADI.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TADI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TADI.edmx</DependentUpon>
+      <LastGenOutput>TADI.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

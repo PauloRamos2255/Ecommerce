@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Inicio de Sesion</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS v5.2.1 -->
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/imagenes/logo.jpg" type="image/x-">
+</head>
+
+<body>
+    <div class="login">
+        <section class="vh-100">
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-9 col-lg-6 col-xl-5">
+                        <img src="/imagenes/logo.jpg"
+                             class="img-fluid" alt="Sample image">
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <form id="login" action="@Url.Action("Index","Home")" method="post">
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <h1>Bienvenido(a) a TADI</h1>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" name="correo" class="form-control form-control-lg"
+                                       placeholder="Dirección de correo Electronico" />
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-3">
+                                <input type="password" name="clave" class="form-control form-control-lg"
+                                       placeholder="Contraseña" />
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Checkbox -->
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                                    <label class="form-check-label" for="form2Example3">
+                                        Recordar Contraseña
+                                    </label>
+                                </div>
+                                <a href="@Url.Action("Recuperar","Home")" class="text-body">¿Has olvidado tu contraseña?</a>
+                            </div>
+
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <a href="menu.html">
+                                    <button type="submit" class="btn btn-danger btn-lg">
+                                        Iniciar Sesion
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="text-center text-lg-start ">
+                                <p class="small fw-bold mt-2 pt-1 mb-0">
+                                    ¿No tienes una cuenta? <a href="@Url.Action("Registrar","Home")"
+                                                              class="link-danger">Registrarte</a>
+                                </p>
+                            </div>
+                            <div class="mt-2 pt-2">
+                                @{
+                                    if (ViewBag.Error != null)
+                                    {
+                                        <div class="form-floating mb-3">
+                                            <div class="alert alert-danger" role="alert">
+                                                @ViewBag.Error
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                                
+
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <main>
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+
+</body>
+
+</html>
