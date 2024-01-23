@@ -11,23 +11,23 @@ namespace Datos
     public class CD_Usuarios
     {
 
-        public List<Usuario> ListarUsuarios()
+        public List<Usuarios> ListarUsuarios()
         {
             try
             {
-                List<Usuario> Lista = new List<Usuario>();
-                TADIAdminEntities Tadi = new TADIAdminEntities();
-                var query = Tadi.Usuarios.OrderBy(micarrito => micarrito.id);
+                List<Usuarios> Lista = new List<Usuarios>();
+                ecommerce2024Entities Tadi = new ecommerce2024Entities();
+                var query = Tadi.USUARIO.OrderBy(micarrito => micarrito.IdUsuario);
                 foreach (var miObejto in query)
                 {
-                    Usuario obj = new Usuario();
-                    obj.id = miObejto.id;
+                    Usuarios obj = new Usuarios();
+                    obj.id = miObejto.IdUsuario;
                     obj.nombre = miObejto.Nombres;
                     obj.apellido = miObejto.Apellidos;
-                    obj.id_roles = Convert.ToInt32(miObejto.Id_Rol);
+                    obj.id_roles = Convert.ToInt32(miObejto.idRol);
                     obj.correo = miObejto.Correo;
-                    obj.contraseña = miObejto.Contraseña;
-                    obj.numero = miObejto.Numero;
+                    obj.contraseña = miObejto.Clave;
+                    obj.numero = miObejto.numero;
                     obj.restablecer = Convert.ToBoolean(miObejto.Reestablecer);
                     obj.activo= Convert.ToBoolean(miObejto.Activo);
        
@@ -37,34 +37,25 @@ namespace Datos
             }
             catch
             {
-                List<Usuario> error = new List<Usuario>();
+                List<Usuarios> error = new List<Usuarios>();
                 return error;
             }
         }
 
 
-        public int Registrar(Usuario obj, out string Mensaje)
+        public int Registrar(Usuarios obj, out string Mensaje)
         {
             int idautogenerado = 0;
             Mensaje = string.Empty;
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
                     var resultado = new ObjectParameter("Resultado", typeof(int));
                     var mensaje = new ObjectParameter("Mensaje", typeof(string));
 
-                    db.sp_Registrarusuario(
-                        obj.nombre,
-                        obj.apellido,
-                        obj.correo,
-                        obj.id_roles,
-                        obj.contraseña,
-                        obj.numero,
-                        obj.activo,
-                        mensaje,
-                        resultado
-                    );
+                    db.sp_RegistrarUsuario(
+                         obj.nombre, obj.apellido, obj.correo, obj.contraseña, obj.activo, obj.id_roles, obj.numero, mensaje, resultado );
                     idautogenerado = (int)resultado.Value;
                     Mensaje = (string)mensaje.Value;
                 }
@@ -78,19 +69,19 @@ namespace Datos
             return idautogenerado;
         }
 
-        public bool Editar(Usuario obj, out string Mensaje)
+        public bool Editar(Usuarios obj, out string Mensaje)
         {
             bool resultado = false;
             Mensaje = string.Empty;
 
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
                     ObjectParameter resultadoParam = new ObjectParameter("Resultado", typeof(bool));
 
-                    db.sp_EditarUsuario(obj.id, obj.nombre, obj.apellido, obj.id_roles, obj.correo, obj.numero , obj.activo, mensajeParam, resultadoParam);
+                    db.sp_EditarUsuario(obj.id, obj.nombre, obj.apellido, obj.correo,  obj.activo, obj.id_roles ,obj.numero, mensajeParam, resultadoParam);
 
                     Mensaje = mensajeParam.Value.ToString();
                     resultado = (bool)resultadoParam.Value;
@@ -113,12 +104,12 @@ namespace Datos
 
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
-                    var usuarioAEliminar = db.Usuarios.FirstOrDefault(u => u.id == idUsuario);
+                    var usuarioAEliminar = db.USUARIO.FirstOrDefault(u => u.IdUsuario == idUsuario);
                     if (usuarioAEliminar != null)
                     {
-                        db.Usuarios.Remove(usuarioAEliminar);
+                        db.USUARIO.Remove(usuarioAEliminar);
                         db.SaveChanges();
                         resultado = true;
                         mensaje = "Usuario eliminado correctamente";
@@ -152,15 +143,15 @@ namespace Datos
                     throw new ArgumentException("La nueva clave no puede estar vacía");
                 }
 
-                using (TADIAdminEntities carrito = new TADIAdminEntities())
+                using (ecommerce2024Entities carrito = new ecommerce2024Entities())
                 {
-                    Usuarios Usuario = carrito.Usuarios.FirstOrDefault(u => u.id == IdUsuario);
+                    USUARIO Usuario = carrito.USUARIO.FirstOrDefault(u => u.IdUsuario == IdUsuario);
                     if (Usuario == null)
                     {
                         throw new ArgumentException($"No se encontró ningún usuario con el Id {IdUsuario}");
                     }
 
-                    Usuario.Contraseña = Nuevaclave;
+                    Usuario.Clave = Nuevaclave;
                     Usuario.Reestablecer = false;
 
                     if (carrito.SaveChanges() > 0)
@@ -193,15 +184,15 @@ namespace Datos
                     throw new ArgumentException("La nueva clave no puede estar vacía");
                 }
 
-                using (TADIAdminEntities carrito = new TADIAdminEntities())
+                using (ecommerce2024Entities carrito = new ecommerce2024Entities())
                 {
-                    Usuarios Usuario = carrito.Usuarios.FirstOrDefault(u => u.id == IdUsuario);
+                    USUARIO Usuario = carrito.USUARIO.FirstOrDefault(u => u.IdUsuario == IdUsuario);
                     if (Usuario == null)
                     {
                         throw new ArgumentException($"No se encontró ningún usuario con el Id {IdUsuario}");
                     }
 
-                    Usuario.Contraseña = clave;
+                    Usuario.Clave = clave;
                     Usuario.Reestablecer = true;
 
                     if (carrito.SaveChanges() > 0)

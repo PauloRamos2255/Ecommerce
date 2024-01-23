@@ -16,12 +16,12 @@ namespace Datos
             try
             {
                 List<Marcas> Lista = new List<Marcas>();
-                TADIAdminEntities tadi = new TADIAdminEntities();
-                var query = tadi.Marca.OrderBy(micarrito => micarrito.id);
+                ecommerce2024Entities tadi = new ecommerce2024Entities();
+                var query = tadi.MARCA.OrderBy(micarrito => micarrito.IdMarca);
                 foreach (var miObejto in query)
                 {
                     Marcas objMarca = new Marcas();
-                    objMarca.id = miObejto.id;
+                    objMarca.id = miObejto.IdMarca;
                     objMarca.dexcripcion = miObejto.Descripcion;
                     objMarca.Activo = Convert.ToBoolean(miObejto.Activo);
 
@@ -44,7 +44,7 @@ namespace Datos
 
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
 
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
@@ -78,7 +78,7 @@ namespace Datos
 
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
 
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
@@ -110,7 +110,7 @@ namespace Datos
 
             try
             {
-                using (var carrito = new TADIAdminEntities())
+                using (var carrito = new ecommerce2024Entities())
                 {
 
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));

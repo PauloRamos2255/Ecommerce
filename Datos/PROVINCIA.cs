@@ -12,15 +12,10 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Tb_Ubigeo
+    public partial class PROVINCIA
     {
-        public string Id_Ubigeo { get; set; }
-        public string IdDepa { get; set; }
-        public string IdProv { get; set; }
-        public string IdDist { get; set; }
-        public string Departamento { get; set; }
-        public string Provincia { get; set; }
-        public string Distrito { get; set; }
-        public string Cod_Ven { get; set; }
+        public string IdProvincia { get; set; }
+        public string Descripcion { get; set; }
+        public string IdDepartamento { get; set; }
     }
 }

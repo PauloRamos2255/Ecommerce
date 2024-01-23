@@ -14,7 +14,7 @@ namespace Negocios
 
         CD_Roles objRoles = new CD_Roles();
 
-        public List<Rol> ListarRol()
+        public List<Entidad_.Rol> ListarRol()
         {
             return objRoles.ListarRol();
         }

@@ -14,7 +14,7 @@ namespace Datos
         {
             try
             {
-                TADIAdminEntities TADI = new TADIAdminEntities();
+                ecommerce2024Entities TADI = new ecommerce2024Entities();
                 var result = TADI.sp_ReporteDashboard().FirstOrDefault();
 
                 Dashboard objDashBoard = new Dashboard();
@@ -37,7 +37,7 @@ namespace Datos
         {
             try
             {
-                using (var TADI = new TADIAdminEntities()) // Replace "YourEntities" with the name of your EF context
+                using (var TADI = new ecommerce2024Entities()) // Replace "YourEntities" with the name of your EF context
                 {
                     var result = TADI.sp_ReporteVentas(fechaInicio, fechaFin, idTransaccion).ToList();
 

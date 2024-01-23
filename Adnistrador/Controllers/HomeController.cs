@@ -113,7 +113,7 @@ namespace Adnistrador.Controllers
         [HttpGet]
         public JsonResult ListaProducto()
         {
-            List<Producto> oLista = new List<Producto>();
+            List<Productos> oLista = new List<Productos>();
             oLista = new CN_Producto().Listar();
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
@@ -126,8 +126,8 @@ namespace Adnistrador.Controllers
             bool operacion_exitosa = true;
             bool guardar_imagen_exito = true;
 
-            Producto oProducto = new Producto();
-            oProducto = JsonConvert.DeserializeObject<Producto>(objeto);
+            Productos oProducto = new Productos();
+            oProducto = JsonConvert.DeserializeObject<Productos>(objeto);
 
             decimal precio;
 
@@ -211,8 +211,8 @@ namespace Adnistrador.Controllers
         public JsonResult ImagenProducto(int id)
         {
 
-        
-            Producto oproducto = new CN_Producto().Listar().Where(p => p.IdProducto == id).FirstOrDefault();
+
+            Productos oproducto = new CN_Producto().Listar().Where(p => p.IdProducto == id).FirstOrDefault();
 
             //string textoBase64 = CN_Recursos.ConvertirBase64(Path.Combine(oproducto.RutaImagen,oproducto.NombreImagen), out conversion );
 

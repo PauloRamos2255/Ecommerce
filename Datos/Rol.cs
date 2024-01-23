@@ -12,26 +12,18 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class CLIENTE
+    public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CLIENTE()
+        public Rol()
         {
-            this.CARRITO = new HashSet<CARRITO>();
-            this.VENTA = new HashSet<VENTA>();
+            this.USUARIO = new HashSet<USUARIO>();
         }
     
-        public int IdCliente { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public string Correo { get; set; }
-        public string Clave { get; set; }
-        public Nullable<bool> Restablecer { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public int IdRol { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CARRITO> CARRITO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VENTA> VENTA { get; set; }
+        public virtual ICollection<USUARIO> USUARIO { get; set; }
     }
 }

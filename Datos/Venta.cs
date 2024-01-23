@@ -12,25 +12,27 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Venta
+    public partial class VENTA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Venta()
+        public VENTA()
         {
-            this.Detalle_Venta = new HashSet<Detalle_Venta>();
+            this.DETALLE_VENTA = new HashSet<DETALLE_VENTA>();
         }
     
-        public int id_Venta { get; set; }
-        public Nullable<int> id_Cliente { get; set; }
+        public int IdVenta { get; set; }
+        public Nullable<int> IdCliente { get; set; }
+        public Nullable<int> TotalProducto { get; set; }
+        public Nullable<decimal> MontoTotal { get; set; }
+        public string Contacto { get; set; }
+        public string IdDistrito { get; set; }
         public string Telefono { get; set; }
         public string Direccion { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public Nullable<decimal> Precio_Venta { get; set; }
-        public Nullable<decimal> Descuento { get; set; }
-        public string idTransaccion { get; set; }
+        public string IdTransaccion { get; set; }
+        public Nullable<System.DateTime> FechaVenta { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
+        public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle_Venta> Detalle_Venta { get; set; }
+        public virtual ICollection<DETALLE_VENTA> DETALLE_VENTA { get; set; }
     }
 }

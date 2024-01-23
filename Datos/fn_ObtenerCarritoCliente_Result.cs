@@ -10,17 +10,15 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DETALLE_VENTA
+    public partial class fn_ObtenerCarritoCliente_Result
     {
-        public int IdDetalleVenta { get; set; }
-        public Nullable<int> IdVenta { get; set; }
-        public Nullable<int> IdProducto { get; set; }
+        public int IdProducto { get; set; }
+        public string DesMarca { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<decimal> Precio { get; set; }
         public Nullable<int> Cantidad { get; set; }
-        public Nullable<decimal> Total { get; set; }
-    
-        public virtual Producto Producto { get; set; }
-        public virtual VENTA VENTA { get; set; }
+        public string RutaImagen { get; set; }
+        public string NombreImagen { get; set; }
     }
 }

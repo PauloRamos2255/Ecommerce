@@ -1,4 +1,4 @@
-﻿using Entidad;
+﻿
 using Entidad_;
 using System;
 using System.Collections.Generic;
@@ -11,25 +11,25 @@ namespace Datos
     public class CD_Roles
     {
 
-        public List<Rol> ListarRol()
+        public List<Entidad_.Rol> ListarRol()
         {
             try
             {
-                List<Rol> Lista = new List<Rol>();
-                TADIAdminEntities Tadi = new TADIAdminEntities();
-                var query = Tadi.Roles.OrderBy(id => id.id);
+                List<Entidad_.Rol> Lista = new List<Entidad_.Rol>();
+                ecommerce2024Entities Tadi = new ecommerce2024Entities();
+                var query = Tadi.Rol.OrderBy(id => id.IdRol);
                 foreach (var miObejto in query)
                 {
-                   Rol rol = new Rol();
-                    rol.id = miObejto.id;
-                    rol.descripcion = miObejto.descripcion;
+                    Entidad_.Rol rol = new Entidad_.Rol();
+                    rol.id = miObejto.IdRol;
+                    rol.descripcion = miObejto.Descripcion;
                     Lista.Add(rol);
                 }
                 return Lista;
             }
             catch
             {
-                List<Rol> error = new List<Rol>();
+                List<Entidad_.Rol> error = new List<Entidad_.Rol>();
                 return error;
             }
         }

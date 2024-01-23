@@ -45,11 +45,11 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Dashboard.cs" />
     <Compile Include="Marcas.cs" />
-    <Compile Include="Producto.cs" />
+    <Compile Include="Productos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporte.cs" />
     <Compile Include="Rol.cs" />
-    <Compile Include="Usuario.cs" />
+    <Compile Include="Usuarios.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

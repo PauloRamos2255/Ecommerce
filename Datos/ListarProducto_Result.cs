@@ -10,21 +10,20 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Usuarios
+    public partial class ListarProducto_Result
     {
-        public int id { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public Nullable<int> Id_Rol { get; set; }
-        public string Correo { get; set; }
-        public string Contraseña { get; set; }
-        public Nullable<bool> Reestablecer { get; set; }
+        public int IdProducto { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public int IdMarca { get; set; }
+        public string DesMarca { get; set; }
+        public int IdCategoria { get; set; }
+        public string DesCategoria { get; set; }
+        public Nullable<decimal> Precio { get; set; }
+        public Nullable<int> Stock { get; set; }
+        public string RutaImagen { get; set; }
+        public string NombreImagen { get; set; }
         public Nullable<bool> Activo { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
-        public string Numero { get; set; }
-    
-        public virtual Roles Roles { get; set; }
     }
 }

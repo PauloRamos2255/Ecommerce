@@ -16,16 +16,16 @@ namespace Datos
             try
             {
                 List<Clientes> Lista = new List<Clientes>();
-                TADIAdminEntities Tadi = new TADIAdminEntities();
-                var query = Tadi.Cliente.OrderBy(micarrito => micarrito.id);
+                ecommerce2024Entities Tadi = new ecommerce2024Entities();
+                var query = Tadi.CLIENTE.OrderBy(micarrito => micarrito.IdCliente);
                 foreach (var miObejto in query)
                 {
                     Clientes objCliente = new Clientes();
-                    objCliente.id = Convert.ToInt16(miObejto.id);
-                    objCliente.Nombre = miObejto.Nombre;
-                    objCliente.Apellido = miObejto.Apellido;
+                    objCliente.id = Convert.ToInt16(miObejto.IdCliente);
+                    objCliente.Nombre = miObejto.Nombres;
+                    objCliente.Apellido = miObejto.Apellidos;
                     objCliente.Correo = miObejto.Correo;
-                    objCliente.Contraseña = miObejto.Contraseña;
+                    objCliente.Contraseña = miObejto.Clave;
                     objCliente.Restablecer = Convert.ToBoolean(miObejto.Restablecer);
                     Lista.Add(objCliente); // Agregar objeto Cliente a la lista
                 }
@@ -45,12 +45,12 @@ namespace Datos
             Mensaje = string.Empty;
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
                     ObjectParameter resultadoParam = new ObjectParameter("Resultado", typeof(int));
 
-                    db.sp_RegistarCliente(obj.Nombre, obj.Apellido, obj.Correo, obj.Contraseña,obj.sexo, mensajeParam, resultadoParam);
+                    db.sp_RegistarCliente(obj.Nombre, obj.Apellido, obj.Correo, obj.Contraseña, mensajeParam, resultadoParam);
 
                     Mensaje = mensajeParam.Value.ToString();
                     idautogenerado = (int)resultadoParam.Value;
@@ -79,15 +79,15 @@ namespace Datos
                     throw new ArgumentException("La nueva clave no puede estar vacía");
                 }
 
-                using (TADIAdminEntities carrito = new TADIAdminEntities())
+                using (ecommerce2024Entities carrito = new ecommerce2024Entities())
                 {
-                    Cliente Cliente = carrito.Cliente.FirstOrDefault(u => u.id == IdCliente);
+                    CLIENTE Cliente = carrito.CLIENTE.FirstOrDefault(u => u.IdCliente == IdCliente);
                     if (Cliente == null)
                     {
                         throw new ArgumentException($"No se encontró ningún Cliente con el Id {IdCliente}");
                     }
 
-                    Cliente.Contraseña = clave;
+                    Cliente.Clave = clave;
                     Cliente.Restablecer = true;
 
                     if (carrito.SaveChanges() > 0)
@@ -120,15 +120,15 @@ namespace Datos
                     throw new ArgumentException("La nueva clave no puede estar vacía");
                 }
 
-                using (TADIAdminEntities carrito = new TADIAdminEntities())
+                using (ecommerce2024Entities carrito = new ecommerce2024Entities())
                 {
-                    Cliente Cliente = carrito.Cliente.FirstOrDefault(u => u.id == IdCliente);
+                    CLIENTE Cliente = carrito.CLIENTE.FirstOrDefault(u => u.IdCliente == IdCliente);
                     if (Cliente == null)
                     {
                         throw new ArgumentException($"No se encontró ningún Cliente con el Id {IdCliente}");
                     }
 
-                    Cliente.Contraseña = Nuevaclave;
+                    Cliente.Clave = Nuevaclave;
                     Cliente.Restablecer = false;
 
                     if (carrito.SaveChanges() > 0)

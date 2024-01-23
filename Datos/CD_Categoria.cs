@@ -17,12 +17,12 @@ namespace Datos
             try
             {
                 List<Categorias> Lista = new List<Categorias>();
-                TADIAdminEntities Tadi = new TADIAdminEntities();
-                var query = Tadi.Categoria.OrderBy(micarrito => micarrito.id);
+                ecommerce2024Entities Tadi = new ecommerce2024Entities();
+                var query = Tadi.CATEGORIA.OrderBy(micarrito => micarrito.IdCategoria);
                 foreach (var miObejto in query)
                 {
                     Categorias obj = new Categorias();
-                    obj.id= miObejto.id;
+                    obj.id= miObejto.IdCategoria;
                     obj.descripcion = miObejto.Descripcion;
                     obj.Activo = Convert.ToBoolean(miObejto.Activo);
                     Lista.Add(obj); // Agregar objeto Cliente a la lista
@@ -43,7 +43,7 @@ namespace Datos
             Mensaje = string.Empty;
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
                     ObjectParameter resultadoParam = new ObjectParameter("Resultado", typeof(int));
@@ -72,7 +72,7 @@ namespace Datos
             Mensaje = string.Empty;
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
                     ObjectParameter resultadoParam = new ObjectParameter("Resultado", typeof(int));
@@ -102,7 +102,7 @@ namespace Datos
 
             try
             {
-                using (var tadi = new TADIAdminEntities())
+                using (var tadi = new ecommerce2024Entities())
                 {
 
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));

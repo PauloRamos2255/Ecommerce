@@ -13,12 +13,12 @@ namespace Negocios
 
         private CD_Usuarios OBJCapaDato = new CD_Usuarios();
 
-        public List<Usuario> Listar()
+        public List<Usuarios> Listar()
         {
             return OBJCapaDato.ListarUsuarios();
         }
 
-        public int Registrar(Usuario obj, out string Mensaje)
+        public int Registrar(Usuarios obj, out string Mensaje)
         {
             Mensaje = string.Empty;
 
@@ -41,7 +41,7 @@ namespace Negocios
             else
             {
                 // Aquí hacemos la validación para verificar si el correo ya está registrado
-                List<Usuario> usuarios = OBJCapaDato.ListarUsuarios();
+                List<Usuarios> usuarios = OBJCapaDato.ListarUsuarios();
                 bool correoRegistrado = usuarios.Any(u => u.correo == obj.correo);
 
                 if (correoRegistrado)
@@ -79,7 +79,7 @@ namespace Negocios
         }
 
 
-        public bool Editar(Usuario obj, out string Mensaje)
+        public bool Editar(Usuarios obj, out string Mensaje)
         {
             Mensaje = string.Empty;
 

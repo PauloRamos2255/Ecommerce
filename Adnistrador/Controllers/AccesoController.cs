@@ -41,7 +41,7 @@ namespace Adnistrador.Controllers
         [HttpPost]
         public ActionResult Index(string correo, string clave)
         {
-            Usuario oUsuario = new Usuario();
+            Usuarios oUsuario = new Usuarios();
 
             oUsuario = new CN_Usuarios().Listar().Where(u => u.correo == correo && u.contraseña == CN_Recurso.ConverttirSha256(clave)).FirstOrDefault();
 
@@ -84,7 +84,7 @@ namespace Adnistrador.Controllers
         [HttpPost]
         public ActionResult CambiarClave(string IdUsuario, string clave, string nuevaclave, string comfirmarclave)
         {
-            Usuario oUsuario = new Usuario();
+            Usuarios oUsuario = new Usuarios();
 
             oUsuario = new CN_Usuarios().Listar().Where(u => u.id == int.Parse(IdUsuario)).FirstOrDefault();
 
@@ -123,7 +123,7 @@ namespace Adnistrador.Controllers
         [HttpPost]
         public ActionResult Reestablecer(string correo)
         {
-            Usuario ousuario = new Usuario();
+            Usuarios ousuario = new Usuarios();
             ousuario = new CN_Usuarios().Listar().Where(item => item.correo == correo).FirstOrDefault();
             if (ousuario == null)
             {
@@ -156,8 +156,8 @@ namespace Adnistrador.Controllers
         [HttpPost]
         public ActionResult OtraForma(string numero) 
         {
-           
-            Usuario ousuario = new Usuario();
+
+            Usuarios ousuario = new Usuarios();
             ousuario = new CN_Usuarios().Listar().Where(item => item.numero == numero).FirstOrDefault();
             if (ousuario == null)
             {

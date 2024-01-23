@@ -12,23 +12,23 @@ namespace Datos
     public class CD_Producto
     {
 
-        public List<Producto> Listar()
+        public List<Productos> Listar()
         {
             try
             {
-                List<Producto> objLista = new List<Producto>();
-                TADIAdminEntities tadi = new TADIAdminEntities();
+                List<Productos> objLista = new List<Productos>();
+                ecommerce2024Entities tadi = new ecommerce2024Entities();
 
-                var query = tadi.Productos.OrderBy(micarrito => micarrito.id);
+                var query = tadi.Producto.OrderBy(micarrito => micarrito.IdProducto);
 
                 foreach (var miObjeto in query)
                 {
-                    Producto objProducto = new Producto();
-                    objProducto.IdProducto = miObjeto.id;
+                    Productos objProducto = new Productos();
+                    objProducto.IdProducto = miObjeto.IdProducto;
                     objProducto.Nombre = miObjeto.Nombre;
                     objProducto.Descripcion = miObjeto.Descripcion;
-                    objProducto.IdMarca =Convert.ToInt16(miObjeto.id_Mar);
-                    objProducto.IdCategoria = Convert.ToInt16(miObjeto.id_Categoria);
+                    objProducto.IdMarca =Convert.ToInt16(miObjeto.IdMarca);
+                    objProducto.IdCategoria = Convert.ToInt16(miObjeto.IdCategotia);
                     objProducto.Precio = Convert.ToDecimal(miObjeto.Precio);
                     objProducto.Stock = Convert.ToInt16(miObjeto.Stock);
                     objProducto.RutaImagen =miObjeto.RutaImagen;
@@ -48,21 +48,21 @@ namespace Datos
 
 
 
-        public int Registrar(Producto obj, out string Mensaje)
+        public int Registrar(Productos obj, out string Mensaje)
         {
             int idautogenerado = 0;
             Mensaje = string.Empty;
 
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
 
 
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
                     ObjectParameter resultadoParam = new ObjectParameter("Resultado", typeof(bool));
 
-                    db.sp_RegistrarProducto(obj.Nombre, obj.Descripcion,obj.IdMarca,obj.IdCategoria, obj.Precio, obj.Stock, obj.Activo, mensajeParam, resultadoParam);
+                    db.sp_RegistrarProducto(obj.Nombre, obj.Descripcion,obj.IdMarca , obj.IdCategoria, obj.Precio, obj.Stock, obj.Activo, mensajeParam, resultadoParam);
 
                     idautogenerado = (int)resultadoParam.Value;
                     Mensaje = mensajeParam.Value.ToString();
@@ -82,9 +82,9 @@ namespace Datos
 
 
 
-        TADIAdminEntities tadi = new TADIAdminEntities();
+        ecommerce2024Entities tadi = new ecommerce2024Entities();
 
-        public bool GuardarDatosImagen(Producto obj, out string Mensaje)
+        public bool GuardarDatosImagen(Productos obj, out string Mensaje)
         {
             bool resultado = false;
             Mensaje = string.Empty;
@@ -92,7 +92,7 @@ namespace Datos
             try
             {
                 // Buscar el producto en la base de datos por su IdProducto
-                Productos objProductos = tadi.Productos.FirstOrDefault(miProductos => miProductos.id == obj.IdProducto);
+                Producto objProductos = tadi.Producto.FirstOrDefault(miProductos => miProductos.IdProducto == obj.IdProducto);
 
                 if (objProductos != null)
                 {
@@ -125,14 +125,14 @@ namespace Datos
 
         }
 
-        public bool Editar(Producto obj, out string Mensaje)
+        public bool Editar(Productos obj, out string Mensaje)
         {
             bool resultado = false;
             Mensaje = string.Empty;
 
             try
             {
-                using (var db = new TADIAdminEntities())
+                using (var db = new ecommerce2024Entities())
                 {
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));
                     ObjectParameter resultadoParam = new ObjectParameter("Resultado", typeof(int));
@@ -163,7 +163,7 @@ namespace Datos
 
             try
             {
-                using (var carrito = new TADIAdminEntities())
+                using (var carrito = new ecommerce2024Entities())
                 {
 
                     ObjectParameter mensajeParam = new ObjectParameter("Mensaje", typeof(string));

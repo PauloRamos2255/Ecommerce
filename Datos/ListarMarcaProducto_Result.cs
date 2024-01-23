@@ -10,17 +10,10 @@
 namespace Datos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DETALLE_VENTA
+    public partial class ListarMarcaProducto_Result
     {
-        public int IdDetalleVenta { get; set; }
-        public Nullable<int> IdVenta { get; set; }
-        public Nullable<int> IdProducto { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<decimal> Total { get; set; }
-    
-        public virtual Producto Producto { get; set; }
-        public virtual VENTA VENTA { get; set; }
+        public int IdMarca { get; set; }
+        public string Descripcion { get; set; }
     }
 }

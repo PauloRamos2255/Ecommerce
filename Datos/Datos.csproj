@@ -53,11 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Carrito.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="CARRITO.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="Categoria.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="CATEGORIA.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
     <Compile Include="CD_Categoria.cs" />
     <Compile Include="CD_Cliente.cs" />
@@ -66,63 +66,81 @@
     <Compile Include="CD_Producto.cs" />
     <Compile Include="CD_Roles.cs" />
     <Compile Include="CD_Usuarios.cs" />
-    <Compile Include="Cliente.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="CLIENTE.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="Detalle_Venta.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="DEPARTAMENTO.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="Marca.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="DETALLE_VENTA.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="Productos.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="DISTRITO.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eccomerce.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eccomerce.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eccomerce.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eccomerce.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Eccomerce.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="fn_ListarComprar_Result.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_ObtenerCarritoCliente_Result.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarMarcaProducto_Result.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListarProducto_Result.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MARCA.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Producto.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Roles.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="PROVINCIA.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rol.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ReporteDashboard_Result.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ReporteVentas_Result.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="TADI.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TADI.Context.tt</DependentUpon>
+    <Compile Include="USUARIO.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
-    <Compile Include="TADI.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TADI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TADI.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TADI.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Tb_Ubigeo.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Usuarios.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Venta.cs">
-      <DependentUpon>TADI.tt</DependentUpon>
+    <Compile Include="VENTA.cs">
+      <DependentUpon>Eccomerce.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
-    <EntityDeploy Include="TADI.edmx">
+    <EntityDeploy Include="Eccomerce.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TADI.Designer.cs</LastGenOutput>
+      <LastGenOutput>Eccomerce.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="TADI.edmx.diagram">
-      <DependentUpon>TADI.edmx</DependentUpon>
+    <None Include="Eccomerce.edmx.diagram">
+      <DependentUpon>Eccomerce.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -134,15 +152,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TADI.Context.tt">
+    <Content Include="Eccomerce.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TADI.edmx</DependentUpon>
-      <LastGenOutput>TADI.Context.cs</LastGenOutput>
+      <DependentUpon>Eccomerce.edmx</DependentUpon>
+      <LastGenOutput>Eccomerce.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="TADI.tt">
+    <Content Include="Eccomerce.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TADI.edmx</DependentUpon>
-      <LastGenOutput>TADI.cs</LastGenOutput>
+      <DependentUpon>Eccomerce.edmx</DependentUpon>
+      <LastGenOutput>Eccomerce.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

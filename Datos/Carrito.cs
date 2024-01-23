@@ -12,14 +12,14 @@ namespace Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Carrito
+    public partial class CARRITO
     {
-        public int id_Carrito { get; set; }
-        public Nullable<int> id_Cliente { get; set; }
-        public Nullable<int> id_Producto { get; set; }
+        public int IdCarrito { get; set; }
+        public Nullable<int> IdCliente { get; set; }
+        public Nullable<int> IdProducto { get; set; }
         public Nullable<int> Cantidad { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
-        public virtual Productos Productos { get; set; }
+        public virtual CLIENTE CLIENTE { get; set; }
+        public virtual Producto Producto { get; set; }
     }
 }

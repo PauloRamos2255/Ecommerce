@@ -41,13 +41,13 @@ namespace Adnistrador.Controllers
         [HttpGet]
         public JsonResult ListarUsuario()
         {
-            List<Usuario> oLista = new List<Usuario>();
+            List<Usuarios> oLista = new List<Usuarios>();
             oLista = new CN_Usuarios().Listar();
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult GuardarUsuario(Usuario objeto)
+        public JsonResult GuardarUsuario(Usuarios objeto)
         {
             object resultado;
             string mensaje = string.Empty;

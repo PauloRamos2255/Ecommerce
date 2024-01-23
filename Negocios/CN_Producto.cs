@@ -6,18 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Negocios
 {
     public class CN_Producto
     {
         private CD_Producto OBJCapaDato = new CD_Producto();
 
-        public List<Producto> Listar()
+        public List<Productos> Listar()
         {
             return OBJCapaDato.Listar();
         }
 
-        public int Registrar(Producto obj, out string Mensaje)
+        public int Registrar(Productos obj, out string Mensaje)
         {
             Mensaje = string.Empty;
 
@@ -63,7 +64,7 @@ namespace Negocios
         }
 
 
-        public bool Editar(Producto obj, out string Mensaje)
+        public bool Editar(Productos obj, out string Mensaje)
         {
             Mensaje = string.Empty;
 
@@ -109,7 +110,7 @@ namespace Negocios
         }
 
 
-        public bool GuardarDatosImagen(Producto obj, out string Mensaje)
+        public bool GuardarDatosImagen(Productos obj, out string Mensaje)
         {
             return OBJCapaDato.GuardarDatosImagen(obj, out Mensaje);
         }

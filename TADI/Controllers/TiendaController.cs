@@ -20,7 +20,7 @@ namespace TADI.Controllers
         [HttpPost]
         public JsonResult ListarProducto(int IdCategoria, int IdMarca)
         {
-            List<Producto> lista = new List<Producto>();
+            List<Productos> lista = new List<Productos>();
             bool conversion;
 
 
@@ -28,7 +28,7 @@ namespace TADI.Controllers
             .Where(p => (IdCategoria == 0 || p.IdCategoria == IdCategoria) &&
                 (IdMarca == 0 || p.IdMarca == IdMarca) &&
                 p.Stock > 0 && p.Activo)
-                .Select(p => new Producto
+                .Select(p => new Productos
                 {
                     IdProducto = p.IdProducto,
                     Nombre = p.Nombre,
